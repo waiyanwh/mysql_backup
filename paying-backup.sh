@@ -1,23 +1,26 @@
 #!/bin/bash
 
+# Title 	: Backup multiple database on multiple hosts
 # Database credentials
-allinone=( ericsson fairyland idcreative mbuyy mcg naingtechlabs newstarlight nicestyletravel winmobileworld )
-password=( bbj7mmv78zgcjdu1jp ykec37c3zkzwiyyqze 4gaxwdig61h0esmeur s88ipezryu3sn0d6ab qvnc5qjcegz0baighm sx5x4uvviwx6r4txd0 k5hc0pfbkvnk7sd8fe mb37iboogwjkfygu2j h4kzcxuvwhd85eav8h )
+# for multi database and multihost
+# I made this script only for aws rds
+# Please make some changes to do with your work
+allinone=("All RDS instance name go here" ) # please RDS instances name in array format
+password=("All password for RDS go here" ) # passwords in array
 
 # Directory to save sql dump files
 # opath=$HOME/paying_dbbackup
 # mysql hosts
-dns=".c4yqwynpry4t.ap-southeast-2.rds.amazonaws.com"
+dns="Your RDS DNS go here" # RDS instance dns name 
 mysqlhost=()
 for (( j=0; j < ${#allinone[@]}; j++ ))
 do
-	# echo "$i.c4yqwynpry4t.ap-southeast-2.rds.amazonaws.com"
 	mysqlhost[j]="${allinone[j]}$dns"
 done
 
 
 # Date in dd-mm-yy formate
-suffix=$(date +%d-%m-%Y)
+# suffix=$(date +%d-%m-%Y)
 for (( i=0; i < ${#allinone[@]}; i++))
 do
 	SQLFILE=${allinone[$i]}.sql.gz

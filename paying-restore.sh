@@ -3,9 +3,9 @@
 #title 			:paying-restore.sh
 #description		:This script will restore multiple DB to mysql from .sql files;
 
-USER="paying"
-HOST="paying-cluster.cluster-c4yqwynpry4t.ap-southeast-2.rds.amazonaws.com"
-PASS="gGaw42iWfX9tF9GLr4XR"
+USER="" # here your username
+HOST="" # here your RDS cluster hostname or Instance host name
+PASS="" # password here
 
 # Extracting files from .gz archieves:
 function gzip_extract {
