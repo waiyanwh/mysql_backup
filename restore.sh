@@ -43,12 +43,12 @@ for filename in *.sql
 do
 	dbname=${filename%.sql}
 	skipdb=-1
-#	if [ "$IGGY" != "" ]; the
-#	for ignore in $IGGY
-#		do
-#			[ "$dbname" =- "$ignore" ] && skipdb=1 ||:
-#		done
-#	fi
+	if [ "$IGGY" != "" ]; then
+	for ignore in $IGGY
+		do
+			[ "$dbname" =- "$ignore" ] && skipdb=1 ||:
+		done
+	fi
 
 	if [ "$skipdb" == "-1" ]; then
 		skip_create=-1
@@ -60,7 +60,8 @@ do
 		if [ "$skip_create" == "1" ] ; then
 			echo "Database: $dbname already exist, skip creatig and dropping "
 			echo -e "\e[92mDropping existing databases..."
-			mysqladmin drop database $dbname -u $USER -p$PASS -h $HOST > /dev/null
+			mysqladmin drop $dbname -f -u $USER -p$PASS -h $HOST 
+			mysqladmin create $dbname -u $USER -p$PASS -h $HOST > /dev/null
 		else
 			echo "Createing DB: $dbname..."
 			mysqladmin create $dbname -u $USER -p$PASS -h $HOST > /dev/null
